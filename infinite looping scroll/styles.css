@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+    padding: 0;
+    display:grid;
+    min-block-size: 100vh;
+    place-content: center;
+    color: white;
+    background-color: midnightblue;
+}
+
+#header{ 
+    font-size: 3rem;
+    text-align: center;
+}
+
+ul{
+    list-style-type: none;
+    padding-inline: 0;
+    /* border: solid 5px limegreen; */
+}
+
+li{
+    padding: 1rem; 
+    border-radius: 0.5rem;
+    text-wrap: nowrap;
+    background-color:darkslategrey;
+    box-shadow: 0 0.5rem 1rem -0.25rem gray;
+}
+
+.scrollbar{
+    max-width: 600px;
+    margin: auto;
+}
+
+.scrollbar[data-animated="true"] {
+    overflow: hidden;
+    -webkit-mask: linear-gradient(
+        90deg, 
+    transparent, 
+    white 20%, 
+    white 80%, 
+    transparent 
+    );
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+/* 
+This will apply to entire page whereever data attribute for animation is true.
+
+[data-animated="true"] {
+    overflow: hidden;
+}
+
+ For speecific class we specify name of that class before as show above.
+ */
+
+.scrollbar_inner{
+    padding-block: 1rem;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 1rem;
+}
+
+.scrollbar[data-animated="true"] .scrollbar_inner {
+    width: max-content;
+    flex-wrap: nowrap;
+    animation: scroll var(--_animation-duration, 20s) var(--_animation-direction, forwards) linear infinite;
+}
+
+.scrollbar[data-speed="slow"] {
+    --_animation-duration: 30s;
+}
+
+.scrollbar[data-speed="fast"] {
+    --_animation-duration: 10s;
+}
+
+.scrollbar[data-direction="right"] {
+    --_animation-direction: reverse;
+}
+
+.scrollbar[data-direction="left"] {
+    --_animation-direction: forwards;
+}
+
+@keyframes scroll {
+    /* to -> represents the End of the animation */
+    to {
+        transform: translate(calc(-50% - 0.5rem));
+        /* CALC is used to reduce half of the gap property (since its starting at 50% transparent) so the 2nd part may look */
+    }
+}
+
